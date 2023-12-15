@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fairfield Wild Life</title>
+
+    <meta name="viewport" content="width=640, user-scalable=no" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"
+        integrity="sha512-90vH1Z83AJY9DmlWa8WkjkV79yfS2n2Oxhsi2dZbIv0nC4E6m5AbH8Nh156kkM7JePmqD6tcZsfad1ueoaovww=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/async/3.2.0/async.min.js"
+        integrity="sha512-6K6+H87tLdCWvY5ml9ZQXLRlPlDEt8uXmtELhuJRgFyEDv6JvndWHg3jadJuBVGPEhhA2AAt+ROMC2V7EvTIWw=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
+    <script src="../services/main.js"></script>
+
+    <link rel="stylesheet" href="../stylesheets/main.css">
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="nav-icon">
+            <div>
+                <label>Fairfield Wild Life</label>
+            </div>
+            <div>
+                <label>Services</label>
+            </div>
+            <div>
+                <label>About Us</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="loading">
+        <video id="video" autoplay muted playsinline></video>
+        <div id="fps"></div>
+    </div> -->
+
+    <div class="content">
+        <div class="nav-bar-mid">
+            <label>Choose Animals</label>
+        </div>
+        <div class="formDiv">
+            <label>Animal</label>
+            <div class="animalsDiv">
+                <div class="animals">
+                    <input type="checkbox" class="animal" name="animal" value="deer" />
+                    <img src="https://www.wisdeerpark.com/wp-content/uploads/2021/05/shutterstock_1457339318-scaled.jpeg" />
+                </div>
+                <div class="animals">
+                    <input type="checkbox" class="animal" name="animal" value="raccoon" />
+                    <img src="https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cq_auto:eco%2Cw_1200/MTk3MTk5NTI4Mzk3MzgyOTc1/raccoons8.png" />
+                </div>
+                <div class="animals">
+                    <input type="checkbox" class="animal" name="animal" value="squirrel" />
+                    <img src="https://www.nwf.org/-/media/NEW-WEBSITE/Shared-Folder/Wildlife/Mammals/mammal_red-squirrel_shutterstock_600x300.ashx" />
+                </div>
+                <div class="animals">
+                    <input type="checkbox" class="animal" name="animal" value="opossum" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSznBnxtL3ac4y4xoSOQTXdEOvh1CVyNvt4wg&usqp=CAU" />
+                </div>
+                <div class="animals">
+                    <input type="checkbox" class="animal" name="animal" value="bobcat" />
+                    <img src="https://panthera.org/sites/default/files/blog-post-images/Panthera_Social_Bobcat_Ears_Face.jpg" />
+                </div>
+            </div>
+
+            <div class="formContent">
+                <label>Model</label>
+                <select class="selectControl model">
+                    <option>fairfield_wildlife_detector</option>
+                </select>
+            </div>
+
+            <div class="formContent">
+                <label>Confidence Threshold</label>
+                <label id="sliderOutput"></label>
+            </div>
+
+            <div class="formContent">
+                <label>0%</label>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="50" class="slider" id="myRange" onchange="changeSliderValue()">
+                </div>
+                <label>100%</label>
+            </div>
+            
+            <div class="formContent">
+                <label>Camera</label>
+                <select class="selectControl camera" id="videoSource">
+                    <!-- <option>Webcam</option> -->
+                </select>
+            </div>
+            <button class="formBtn" onclick="submitForm()">Submit</button>
+        </div>
+    </div>
+
+    <footer>
+        <div>
+            <span style="color: white;">ABOUT US</span><br><br>
+            <label>HISTORY</label><br><br>
+            <label>JOBS</label><br><br>
+            <label>BLOG</label><br><br>
+            <label>CONTACT</label>
+        </div>
+        <div>
+            <span style="color: white;">USEFUL INFO</span><br><br>
+            <label>FAQS</label><br><br>
+        </div>
+        <div>
+            <span style="color: white;">CORPORATE AND LEGAL</span><br><br>
+            <label>INVESTORS</label><br><br>
+            <label>OUR COMMUNITY</label><br><br>
+            <label>OUR COMMUNITY</label><br><br>
+            <label>TERMS & CONDITIONS</label><br><br>
+            <label>WARRANTY</label><br><br>
+        </div>
+    </footer>
+</body>
+</html>
