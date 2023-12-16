@@ -12,6 +12,8 @@ let locations = [{country: 'US', state: 'Iowa', city: 'Fairfield'},
                  {country: 'US', state: 'New York', city: 'New York City'},
                  {country: 'US', state: 'Florida', city: 'Jacksonville'}];
 
+let models = [{model: 'fairfield_wildlife_detector', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 1}];
+
 navigator.mediaDevices.enumerateDevices().then(function (devices) {
     for(let i = 0; i < devices.length; i++){
         let device = devices[i];
@@ -70,6 +72,8 @@ function submitForm() {
     mlModel = $('.model option:selected').val();
     confidence = $('.slider').val();
     camera = $('#videoSource option:selected').val();
+
+    let trainingModel = models.filter((m) => m.model == mlModel)[0];
     
     $('.content').html('<div class="loading"><video id="video" autoplay muted playsinline></video><div id="fps"></div></div>');
 
@@ -97,12 +101,14 @@ function submitForm() {
             });
         });
 
-    let publishable_key = "rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1";
+    let publishable_key = trainingModel.publishable_key;
     let toLoad = {
-        model: "fairfield_wildlife_detector",
-        version: 1
+        model: trainingModel.model,
+        version: trainingModel.version
     };
 
+    console.log(publishable_key);
+    console.log(toLoad);
     const loadModelPromise = new Promise(function (resolve, reject) {
         roboflow
             .auth({
