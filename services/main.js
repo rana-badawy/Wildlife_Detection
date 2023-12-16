@@ -14,24 +14,6 @@ let locations = [{country: 'US', state: 'Iowa', city: 'Fairfield'},
 
 let models = [{model: 'fairfield_wildlife_detector', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 1}];
 
-navigator.mediaDevices.enumerateDevices().then(function (devices) {
-    for(let i = 0; i < devices.length; i++){
-        let device = devices[i];
-        if (device.kind === 'videoinput') {
-            let option = document.createElement('option');
-            option.value = device.deviceId;
-            option.text = device.label || 'Camera ' + (i + 1);
-            document.querySelector('select#videoSource').appendChild(option);
-        }
-    };
-});
-
-$('document').ready(function() {
-    let slider = $('#myRange');
-    let output = $('#sliderOutput');
-    output.html(slider.val() + '%');
-});
-
 function getRandomLocation() {
     let i =  parseInt(Math.random() * 4);
 

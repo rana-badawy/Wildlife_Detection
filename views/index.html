@@ -6,6 +6,8 @@
 
     <meta name="viewport" content="width=640, user-scalable=no" />
 
+    <link rel="stylesheet" href="../stylesheets/main.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
@@ -18,8 +20,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
     <script src="../services/main.js"></script>
-
-    <link rel="stylesheet" href="../stylesheets/main.css">
 </head>
 
 <body>
@@ -73,8 +73,8 @@
 
             <div class="formContent">
                 <label>Model</label>
-                <select class="selectControl model">
-                    <option>fairfield_wildlife_detector</option>
+                <select class="selectControl model" id="model">
+                    <!-- <option>fairfield_wildlife_detector</option> -->
                 </select>
             </div>
 
@@ -123,4 +123,32 @@
         </div>
     </footer>
 </body>
+
+<script>
+    $('document').ready(function() {
+        let slider = $('#myRange');
+        let output = $('#sliderOutput');
+        output.html(slider.val() + '%');
+
+        for(let i = 0; i < models.length; i++){
+            let model = models[i];
+            let option = document.createElement('option');
+            option.value = model.model;
+            option.text = model.model;
+            document.querySelector('select#model').appendChild(option);
+        };
+
+        navigator.mediaDevices.enumerateDevices().then(function (devices) {
+            for(let i = 0; i < devices.length; i++){
+                let device = devices[i];
+                if (device.kind === 'videoinput') {
+                    let option = document.createElement('option');
+                    option.value = device.deviceId;
+                    option.text = device.label || 'Camera ' + (i + 1);
+                    document.querySelector('select#videoSource').appendChild(option);
+                }
+            };
+        });
+    });
+</script>
 </html>
