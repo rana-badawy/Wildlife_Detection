@@ -158,84 +158,84 @@ function submitForm() {
 
         canvas = $("<canvas/>");
 
-        ctx = canvas[0].getContext("2d");
+        // ctx = canvas[0].getContext("2d");
 
-        let dimensions = videoDimensions(video);
+        // let dimensions = videoDimensions(video);
 
-        console.log(
-            video.videoWidth,
-            video.videoHeight,
-            video.offsetWidth,
-            video.offsetHeight,
-            dimensions
-        );
+        // console.log(
+        //     video.videoWidth,
+        //     video.videoHeight,
+        //     video.offsetWidth,
+        //     video.offsetHeight,
+        //     dimensions
+        // );
 
-        canvas[0].width = video.videoWidth;
-        canvas[0].height = video.videoHeight;
+        // canvas[0].width = video.videoWidth;
+        // canvas[0].height = video.videoHeight;
 
-        canvas.css({
-            width: dimensions.width,
-            height: dimensions.height,
-            left: ($(window).width() - dimensions.width) / 2,
-            top: ($(window).height() - dimensions.height) / 2
-        });
+        // canvas.css({
+        //     width: dimensions.width,
+        //     height: dimensions.height,
+        //     left: ($(window).width() - dimensions.width) / 2,
+        //     top: ($(window).height() - dimensions.height) / 2
+        // });
 
-        $("body").append(canvas);
+        // $("body").append(canvas);
     };
 
     const renderPredictions = function (predictions) {
-        let dimensions = videoDimensions(video);
+        // let dimensions = videoDimensions(video);
 
-        let scale = 1;
+        // let scale = 1;
 
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        predictions.forEach(function (prediction) {
-            const x = prediction.bbox.x;
-            const y = prediction.bbox.y;
+        // predictions.forEach(function (prediction) {
+        //     const x = prediction.bbox.x;
+        //     const y = prediction.bbox.y;
 
-            const width = prediction.bbox.width;
-            const height = prediction.bbox.height;
+        //     const width = prediction.bbox.width;
+        //     const height = prediction.bbox.height;
 
-            // Draw the bounding box.
-            ctx.strokeStyle = prediction.color;
-            ctx.lineWidth = 4;
-            ctx.strokeRect(
-                (x - width / 2) / scale,
-                (y - height / 2) / scale,
-                width / scale,
-                height / scale
-            );
+        //     // Draw the bounding box.
+        //     ctx.strokeStyle = prediction.color;
+        //     ctx.lineWidth = 4;
+        //     ctx.strokeRect(
+        //         (x - width / 2) / scale,
+        //         (y - height / 2) / scale,
+        //         width / scale,
+        //         height / scale
+        //     );
 
-            // Draw the label background.
-            ctx.fillStyle = prediction.color;
-            const textWidth = ctx.measureText(prediction.class).width;
-            const textHeight = parseInt(font, 10); // base 10
-            ctx.fillRect(
-                (x - width / 2) / scale,
-                (y - height / 2) / scale,
-                textWidth + 8,
-                textHeight + 4
-            );
-        });
+        //     // Draw the label background.
+        //     ctx.fillStyle = prediction.color;
+        //     const textWidth = ctx.measureText(prediction.class).width;
+        //     const textHeight = parseInt(font, 10); // base 10
+        //     ctx.fillRect(
+        //         (x - width / 2) / scale,
+        //         (y - height / 2) / scale,
+        //         textWidth + 8,
+        //         textHeight + 4
+        //     );
+        // });
 
-        predictions.forEach(function (prediction) {
-            const x = prediction.bbox.x;
-            const y = prediction.bbox.y;
+        // predictions.forEach(function (prediction) {
+        //     const x = prediction.bbox.x;
+        //     const y = prediction.bbox.y;
 
-            const width = prediction.bbox.width;
-            const height = prediction.bbox.height;
+        //     const width = prediction.bbox.width;
+        //     const height = prediction.bbox.height;
             
-            // Draw the text last to ensure it's on top.
-            ctx.font = font;
-            ctx.textBaseline = "top";
-            ctx.fillStyle = "#000000";
-            ctx.fillText(
-                prediction.class,
-                (x - width / 2) / scale + 4,
-                (y - height / 2) / scale + 1
-            );
-        });
+        //     // Draw the text last to ensure it's on top.
+        //     ctx.font = font;
+        //     ctx.textBaseline = "top";
+        //     ctx.fillStyle = "#000000";
+        //     ctx.fillText(
+        //         prediction.class,
+        //         (x - width / 2) / scale + 4,
+        //         (y - height / 2) / scale + 1
+        //     );
+        // });
 
         predictions.forEach(function(prediction) {
             console.log(prediction.class);
@@ -320,8 +320,8 @@ function submitForm() {
                         total += t / 1000;
                     });
 
-                    let fps = pastFrameTimes.length / total;
-                    $("#fps").text(Math.round(fps));
+                    // let fps = pastFrameTimes.length / total;
+                    // $("#fps").text(Math.round(fps));
                 }
                 prevTime = Date.now();
             })
