@@ -7,7 +7,10 @@ let chunks = [];
 let previousDetection = '';
 let time;
 let recording = false;
-// let rootDir = __dirname.replace('code', '');
+let locations = [{country: 'US', state: 'Iowa', city: 'Fairfield'},
+                 {country: 'US', state: 'Illinois', city: 'Chicago'},
+                 {country: 'US', state: 'New York', city: 'New York City'},
+                 {country: 'US', state: 'Florida', city: 'Jacksonville'}];
 
 navigator.mediaDevices.enumerateDevices().then(function (devices) {
     for(let i = 0; i < devices.length; i++){
@@ -26,6 +29,12 @@ $('document').ready(function() {
     let output = $('#sliderOutput');
     output.html(slider.val() + '%');
 });
+
+function getRandomLocation() {
+    let i =  parseInt(Math.random() * 4);
+
+    return locations[i];
+}
 
 // Update the current slider value (each time you drag the slider handle)
 function changeSliderValue() {
@@ -88,23 +97,6 @@ function submitForm() {
             });
         });
 
-    // const startVideoStreamPromise = navigator.mediaDevices
-    //     .getUserMedia({
-    //         audio: false,
-    //         video: {
-    //             facingMode: cameraMode
-    //         }
-    //     })
-    //     .then(function (stream) {
-    //         return new Promise(function (resolve) {
-    //             video.srcObject = stream;
-    //             video.onloadeddata = function () {
-    //                 video.play();
-    //                 resolve();
-    //             };
-    //         });
-    //     });
-
     let publishable_key = "rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1";
     let toLoad = {
         model: "fairfield_wildlife_detector",
@@ -160,8 +152,6 @@ function submitForm() {
     $(window).resize(function () {
         resizeCanvas();
     });
-
-
 
     const resizeCanvas = function () {
         $("canvas").remove();
@@ -252,6 +242,28 @@ function submitForm() {
             if (prediction.class != previousDetection || Date.now() - time >= 600000) {
                 console.log('inside if 1');
                 previousDetection = prediction.class;
+
+                let location = getRandomLocation();
+
+                const data = {
+                    name: prediction.class,
+                    location: location 
+                }
+
+                fetch('/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success: ', data);
+                })
+                .catch(error => {
+                    console.error('Error: ', error);
+                });
 
                 if (animals.includes(prediction.class) && prediction.confidence >= confidence/100) {
                     console.log('inside if 2');
