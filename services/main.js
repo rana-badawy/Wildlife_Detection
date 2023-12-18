@@ -8,11 +8,24 @@ let previousDetection = '';
 let time;
 let recording = false;
 let locations = [{country: 'US', state: 'Iowa', city: 'Fairfield'},
-                 {country: 'US', state: 'Illinois', city: 'Chicago'},
-                 {country: 'US', state: 'New York', city: 'New York City'},
-                 {country: 'US', state: 'Florida', city: 'Jacksonville'}];
+                 {country: 'US', state: 'Iowa', city: 'Ottumwa'},
+                 {country: 'US', state: 'Iowa', city: 'Cedar Rapids'},
+                 {country: 'US', state: 'Iowa', city: 'Des Moines'},
+                 {country: 'US', state: 'Iowa', city: 'Ames'},
+                 {country: 'US', state: 'Iowa', city: 'Davenport'},
+                 {country: 'US', state: 'Iowa', city: 'Sioux City'},
+                 {country: 'US', state: 'Iowa', city: 'Waterloo'},
+                 {country: 'US', state: 'Iowa', city: 'Dubuque'},
+                 {country: 'US', state: 'Iowa', city: 'Cedar Falls'},
+                 {country: 'US', state: 'Iowa', city: 'Bettendorf'},
+                 {country: 'US', state: 'Iowa', city: 'Mason City'},
+                 {country: 'US', state: 'Iowa', city: 'Muscatine'},
+                 {country: 'US', state: 'Iowa', city: 'Pella'},
+                 {country: 'US', state: 'Iowa', city: 'Iowa City'}];
 
-let models = [{model: 'fairfield_wildlife_detector', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 1}];
+let models = [{model: 'fairfield_wildlife_detector/1', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 1},
+{model: 'fairfield_wildlife_detector/2', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 2},
+{model: 'fairfield_wildlife_detector/3', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 3}];
 
 function getRandomLocation() {
     let i =  parseInt(Math.random() * 4);
@@ -56,6 +69,10 @@ function submitForm() {
     camera = $('#videoSource option:selected').val();
 
     let trainingModel = models.filter((m) => m.model == mlModel)[0];
+    let trainingModelName = trainingModel.model.split('/')[0];
+
+    console.log(trainingModelName);
+    console.log(trainingModel.version);
     
     $('.content').html('<div class="loading"><video id="video" autoplay muted playsinline></video><div id="fps"></div></div>');
 
@@ -85,7 +102,7 @@ function submitForm() {
 
     let publishable_key = trainingModel.publishable_key;
     let toLoad = {
-        model: trainingModel.model,
+        model: trainingModelName,
         version: trainingModel.version
     };
 
