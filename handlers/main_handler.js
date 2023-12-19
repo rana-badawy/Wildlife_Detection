@@ -10,7 +10,7 @@ async function doQuery(query){
                     console.log('Error executing the query - ${err}')
                 }
                 else {
-                    resolve(result);
+                    resolve(JSON.parse(JSON.stringify(result)));
                 }
             }
         );
@@ -63,4 +63,17 @@ async function insert(req, res, next) {
     res.json("Added to DB");
 }
 
-module.exports = {home, upload, insert}
+async function getData(req, res, next) {
+    let query = "select animal.animal_name, location.country, location.state, location.city, animal_location.count " +
+    "from animal_location inner join animal on animal.animal_id = animal_location.animal_id inner join location " +
+    "on animal_location.location_id = location.location_id " +
+    "order by location.country, location.state, location.city, animal.animal_name";
+
+    let data = await doQuery(query);
+
+    console.log(data);
+
+    res.render('data', {data: data});
+}
+
+module.exports = {home, upload, insert, getData}

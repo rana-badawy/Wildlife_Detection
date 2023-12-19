@@ -9,4 +9,6 @@ router.post('/upload', mainHandler.upload);
 
 router.post('/insert', mainHandler.insert);
 
+router.get('/data', mainHandler.getData);
+
 module.exports = router;

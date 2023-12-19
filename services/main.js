@@ -28,7 +28,7 @@ let models = [{model: 'fairfield_wildlife_detector/1', publishable_key: 'rf_UTYI
 {model: 'fairfield_wildlife_detector/3', publishable_key: 'rf_UTYIbxdTwVM2JLLp8gaUqfKCZFx1', version: 3}];
 
 function getRandomLocation() {
-    let i =  parseInt(Math.random() * 4);
+    let i =  parseInt(Math.random() * 14);
 
     return locations[i];
 }
@@ -70,9 +70,6 @@ function submitForm() {
 
     let trainingModel = models.filter((m) => m.model == mlModel)[0];
     let trainingModelName = trainingModel.model.split('/')[0];
-
-    console.log(trainingModelName);
-    console.log(trainingModel.version);
     
     $('.content').html('<div class="loading"><video id="video" autoplay muted playsinline></video><div id="fps"></div></div>');
 
@@ -106,8 +103,6 @@ function submitForm() {
         version: trainingModel.version
     };
 
-    console.log(publishable_key);
-    console.log(toLoad);
     const loadModelPromise = new Promise(function (resolve, reject) {
         roboflow
             .auth({
@@ -245,7 +240,6 @@ function submitForm() {
         predictions.forEach(function(prediction) {
             console.log(prediction.class);
             if (prediction.class != previousDetection || Date.now() - time >= 600000) {
-                console.log('inside if 1');
                 previousDetection = prediction.class;
 
                 let location = getRandomLocation();
@@ -271,7 +265,6 @@ function submitForm() {
                 });
 
                 if (animals.includes(prediction.class) && prediction.confidence >= confidence/100) {
-                    console.log('inside if 2');
                     time = new Date();
 
                     if (recording == false) {

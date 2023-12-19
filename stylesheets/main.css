@@ -160,3 +160,21 @@ footer{
     font-size: 12px;
 }
 
+table {
+    width:97%;
+    border-collapse: collapse;
+    margin: 20px;
+    text-align: center;
+}
+
+td {
+    width: 15%;
+}
+
+tr {
+    height: 50px;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(65, 61, 61);
+}
